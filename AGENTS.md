@@ -11,6 +11,9 @@ npm test             # todas las pruebas (incluye golden master y reglas de arqu
 npm run tipos        # TypeScript estricto (tsc --noEmit)
 npm run indice       # regenera docs/INDICE.md y docs/catalogo.json (correr tras agregar/quitar exportaciones)
 npm run golden       # regenera vectores/golden.json (solo si una simulación cambió A PROPÓSITO)
+txn nuevo "<idea>"   # de una frase a un prototipo jugable (Godot + web), reglas horneadas, arte desde datos, bot
+txn probar --godot   # bot sin pantalla en JS y Godot (misma partida) · txn balance · txn informe
+node herramientas/paridad.ts   # (con GODOT) la simulación JS y la de Godot deben dar resultados idénticos
 npm run crear        # asistente de preguntas → modelos combinados → txnucleo.juego.json + PLAN.md (+ --estilo estilo.json)
 npm run red -- doctor   # red de herramientas externas (pxl, kiln, r2g, CLI-Anything): qué falta; ver docs/RED.md
 npm --prefix <TxNucleo> run red -- estado|construir|revisar-estilo|verificar   # desde la carpeta de un juego
@@ -55,6 +58,9 @@ Requiere Node ≥ 23.6 (ejecuta `.ts` directo, sin compilar).
   (siempre sin shell). MCP propio en `mcp/servidor.ts`, skills en `skills/`, importador Godot en
   `integraciones/godot/`. No copiar código de las herramientas: se instalan con `npm run red -- instalar`.
   Proyecto por juego: `txnucleo.red.json` (`src/enlaces/proyecto.ts`, `src/infraestructura/proyecto-red.ts`).
+  Prototipos: `src/enlaces/horneado.ts` (reglas horneadas), `arte-plantilla.ts`, `src/modelos/idea.ts`,
+  `src/infraestructura/nuevo.ts`, plantilla en `plantillas/accion-cenital/` (simulacion.js = simulacion.gd: si
+  cambiás una, cambiá la otra). Protocolo de prototipos: `docs/IA.md` sección 16; detalle: `docs/HORNEADO.md`.
   Protocolo para agentes: `docs/IA.md` sección 15; guía humana: `docs/USO.md`. Editar solo fuentes
   (`.px.js`, `.kiln.js`); las salidas las regenera `construir`.
 - Referencias: `docs/SHOOTER-3D.md` (pedido más común), `docs/MOTORES.md` (Unity/Godot/Unreal).

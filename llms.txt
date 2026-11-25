@@ -6,6 +6,7 @@ Reglas clave: azar (`Pcg32`) y tiempo (`dt`) siempre inyectados; paso fijo de 60
 
 ## Documentación
 
+- [Reglas horneadas y prototipos jugables](docs/HORNEADO.md): `txn nuevo "<idea>"` → prototipo Godot + web, tablas calculadas por las mecánicas, arte desde datos, bot, paridad entre motores
 - [Cómo usar TxNucleo (guía para personas)](docs/USO.md): instalar, primer juego 2D/3D, ciclo estado → construir, qué archivo es qué, trabajar con una IA, problemas comunes
 - [Manual para IA (de 0 a 100)](docs/IA.md): modelo mental, flujo de trabajo, recetas por género, feedback, red, errores típicos
 - [Instrucciones para agentes](AGENTS.md): comandos y reglas no negociables

@@ -1,6 +1,6 @@
 [package]
 name = "txnucleo"
-version = "0.5.0"
+version = "0.6.0"
 edition = "2021"
 description = "Núcleo de alto rendimiento de txnucleo: azar determinista, física por tiles, hash espacial, A*, Verlet, curvas de escalado, daño y balance. Sin dependencias; compila a nativo y a WebAssembly."
 license-file = "../LICENSE"

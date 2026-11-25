@@ -52,16 +52,42 @@ npm run red -- instalar todo  # pxl, kiln, reference-to-game, CLI-Anything (Godo
 Las herramientas se instalan en `~/.txnucleo/red/` (cambiable con `TXNUCLEO_RED`), cada una fijada a una versión
 probada. Su código no entra a tu juego ni a este repositorio.
 
-Atajo recomendado para usar TxNucleo desde la carpeta de cualquier juego:
+Después, una sola vez, instalá el comando `txn` (queda en el PATH, apuntando a esta carpeta):
 
 ```bash
-# bash / zsh
-alias red='npm --prefix /ruta/a/TxNucleo run --silent red --'
-# PowerShell
-function red { npm --prefix C:\ruta\a\TxNucleo run --silent red -- @args }
+npm link          # desde la carpeta de TxNucleo
+txn ayuda
 ```
 
-En el resto de la guía, `red <comando>` significa eso.
+`txn` incluye todos los comandos de la red (`txn estado`, `txn construir`…). Sin instalarlo:
+`node /ruta/a/TxNucleo/herramientas/txn.ts <comando>`.
+
+## 3b. Lo más rápido: de una idea a un juego que se juega
+
+```bash
+txn nuevo "un roguelite de zombis con armas, visto desde arriba"
+```
+
+En unos 10 segundos (medido en esta máquina, con pxl instalado) deja una carpeta con:
+
+- un **prototipo jugable en Godot y en el navegador** (`--motor godot|web|ambos`): moverse, esquivar, atacar,
+  oleadas con jefe, experiencia, niveles, botín por rareza, interfaz y fin de partida;
+- `reglas.json`: las tablas del juego **calculadas con las mecánicas de TxNucleo** (balance por nivel, curva de
+  experiencia, oleadas, rareza). Godot y la web leen las mismas tablas: no hay fórmulas duplicadas;
+- `arte/personajes.px.js`: el arte de partida **generado desde los datos** (un enemigo por tipo, un cofre por
+  rareza), construido con pxl. Con `--referencia portada.png` toma la paleta de tu imagen;
+- `PLAN.md`: qué entendió de tu idea, qué modelos combinó, qué midió el bot y los siguientes pasos.
+
+```bash
+cd un-roguelite-de-zombis-con-armas-visto
+txn jugar            # Godot   ·   txn jugar --web  → navegador
+txn probar --godot   # el bot juega sin pantalla en JS y en Godot: la misma partida, resultados idénticos
+txn balance          # tiempo para matar, golpes que aguanta, enemigos por nivel, avisos
+txn informe          # informe/index.html: lo que hizo TxNucleo, todo medido
+```
+
+Cómo funciona por dentro: [HORNEADO.md](HORNEADO.md). Si preferís armar el juego paso a paso (otro motor, otro
+género), seguí la sección 4.
 
 ## 4. Tu primer juego 2D (10 minutos)
 
@@ -82,14 +108,14 @@ Hace 12 preguntas (qué hace el jugador, cómo se ve, ritmo...). Con respuestas 
 
 ```bash
 cd ../mi-juego
-red estilo referencia.png --nombre mi-juego --grilla 6 --pixel 320x180x4 --out estilo.json
+txn estilo referencia.png --nombre mi-juego --grilla 6 --pixel 320x180x4 --out estilo.json
 ```
 
 Muestrea la imagen y deja una paleta por roles. Para que el asistente genere las plantillas con esa paleta, volvé
 a correr `crear` con `--estilo estilo.json` (no pisa archivos existentes) o creá una plantilla suelta:
 
 ```bash
-red plantilla-px estilo.json --sprites heroe,slime,cofre --out arte/personajes.px.js
+txn plantilla-px estilo.json --sprites heroe,slime,cofre --out arte/personajes.px.js
 ```
 
 **c) Dibujar.** Editá `arte/personajes.px.js`: cada sprite es una grilla de letras, una letra por color de la
@@ -99,9 +125,9 @@ paleta. Animaciones con `anim()` y `frame()`. Referencia de pxl: `~/.txnucleo/re
 **d) Construir.**
 
 ```bash
-red estado       # + arte/personajes.px.js  nueva
-red construir    # pxl → PNG + hoja; contratos; manifiesto; revisión de estilo; Godot reimporta y verifica
-red estado       # ✓ arte/personajes.px.js  al-dia
+txn estado       # + arte/personajes.px.js  nueva
+txn construir    # pxl → PNG + hoja; contratos; manifiesto; revisión de estilo; Godot reimporta y verifica
+txn estado       # ✓ arte/personajes.px.js  al-dia
 ```
 
 `construir` es **incremental**: solo reconstruye las fuentes que cambiaron, o cuyos recursos alguien tocó a mano.
@@ -120,7 +146,7 @@ Igual que el 2D, pero con perspectiva "primera" o "tercera persona". El asistent
 se prueben con medidas correctas desde el primer día. Editalos (o pedíselo a tu IA) y:
 
 ```bash
-red construir    # kiln → .glb + .modelo.json (medidas, nodos, colisión sugerida, QA)
+txn construir    # kiln → .glb + .modelo.json (medidas, nodos, colisión sugerida, QA)
 ```
 
 En Godot: `TxNucleoImportar.modelo("res://modelos/fusil.modelo.json")` devuelve el modelo con un `StaticBody3D`
@@ -129,9 +155,9 @@ de colisión y sus etiquetas como grupos. En la web, el `.glb` va directo a `GLT
 ## 6. El ciclo de todos los días
 
 ```
-editar fuentes (.px.js / .kiln.js) ──► red estado ──► red construir ──► probar en el motor
+editar fuentes (.px.js / .kiln.js) ──► txn estado ──► txn construir ──► probar en el motor
         ▲                                                   │
-        └──────── red revisar-estilo (colores fuera de paleta) ◄┘
+        └──────── txn revisar-estilo (colores fuera de paleta) ◄┘
 ```
 
 - **`estado`**: qué está nuevo (`+`), cambiado (`~`) o al día (`✓`), recursos rotos y herramientas faltantes.
@@ -156,8 +182,8 @@ editar fuentes (.px.js / .kiln.js) ──► red estado ──► red construir 
 ## 8. Trabajar con una IA
 
 **Claude Code dentro de TxNucleo:** el servidor MCP `txnucleo` ya está declarado en `.mcp.json`. Al abrir el
-repositorio, aprobalo y la IA tiene 11 herramientas: buscar mecánicas, combinar modelos, iniciar, ver estado,
-construir, revisar estilo y verificar.
+repositorio, aprobalo y la IA tiene 14 herramientas: crear un prototipo jugable desde una idea, probarlo con el
+bot, analizar el balance, buscar mecánicas, combinar modelos, iniciar, ver estado, construir, revisar estilo y verificar.
 
 **En la carpeta de tu juego:**
 
@@ -168,6 +194,7 @@ cp -r /ruta/a/TxNucleo/skills/* ~/.claude/skills/      # txnucleo-prototipo, txn
 
 Pedidos que funcionan bien:
 
+- "Creá con TxNucleo un prototipo jugable de un roguelite de zombis visto desde arriba, en Godot y web; probalo con el bot y decime qué ajustarías."
 - "Quiero un roguelite de acción 2D con zombis. Usá TxNucleo: combiná los modelos, iniciá el proyecto y armá el plan."
 - "Tomá el estilo de `ref/portada.png` y dibujá al héroe y dos enemigos con esa paleta; construí y revisá el estilo."
 - "Hacé los modelos de las tres armas del plan a escala, construí y verificá el proyecto Godot."
@@ -186,8 +213,8 @@ exactos en [OHMYGAME.md](OHMYGAME.md). Lo que genere OhMyGame registralo en el m
 
 | Síntoma | Causa y solución |
 |---|---|
-| `falta txnucleo.red.json` | La carpeta no es un proyecto de red: `red iniciar` |
-| `"pxl" no está instalada` | `red instalar pxl` (o `red doctor` para ver todo) |
+| `falta txnucleo.red.json` | La carpeta no es un proyecto de red: `txn iniciar` |
+| `"pxl" no está instalada` | `txn instalar pxl` (o `txn doctor` para ver todo) |
 | Las rutas no se encuentran al usar `npm --prefix` | Las rutas son relativas a la carpeta desde donde llamás; usá el atajo `red` de la sección 3 |
 | `godot: ...` al construir | Definí `GODOT_BIN` con el ejecutable de Godot 4 (en Windows, el `_console.exe`) |
 | `construir` reconstruye algo que no cambiaste | Alguien modificó una salida a mano (el hash no coincide). Es a propósito: las salidas se regeneran desde la fuente |

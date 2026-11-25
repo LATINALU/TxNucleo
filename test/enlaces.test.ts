@@ -175,27 +175,32 @@ test("plan de arte: 2D/3D/interfaz según perspectiva o reglas, tareas por módu
   assert.match(md, /npm run red -- estilo/);
 });
 
-test("mcp: initialize, lista de herramientas, búsqueda real en el índice, combinación y errores", async () => {
+test("mcp: initialize, lista de herramientas, búsqueda real en el índice, combinación, balance y errores", async () => {
   const { atender } = await import("../mcp/servidor.ts");
-  const ini = atender({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18" } })!;
+  const pedir = async (m: object) => (await atender(m as never))!;
+  const ini = await pedir({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18" } });
   assert.equal(ini.result.serverInfo.name, "txnucleo");
-  assert.equal(atender({ jsonrpc: "2.0", method: "notifications/initialized" }), null);
-  const nombres = atender({ jsonrpc: "2.0", id: 2, method: "tools/list" })!.result.tools.map((t: { name: string }) => t.name);
-  assert.deepEqual(nombres, ["buscar_mecanica", "crear_modelo", "red_doctor", "contrato_estilo", "generar_sprites", "generar_modelo", "verificar_juego", "iniciar_juego", "estado_juego", "construir_juego", "revisar_estilo"]);
-  assert.equal(ini.result.serverInfo.version, "0.5.0");
-  const llamar = (name: string, args: object) => atender({ jsonrpc: "2.0", id: 3, method: "tools/call", params: { name, arguments: args } })!.result;
-  const b = JSON.parse(llamar("buscar_mecanica", { consulta: "retroceso dispersion", limite: 3 }).content[0].text);
+  assert.equal(ini.result.serverInfo.version, "0.6.0");
+  assert.equal(await atender({ jsonrpc: "2.0", method: "notifications/initialized" }), null);
+  const nombres = (await pedir({ jsonrpc: "2.0", id: 2, method: "tools/list" })).result.tools.map((x: { name: string }) => x.name);
+  assert.deepEqual(nombres, [
+    "buscar_mecanica", "crear_modelo", "red_doctor", "contrato_estilo", "generar_sprites", "generar_modelo", "verificar_juego",
+    "iniciar_juego", "estado_juego", "construir_juego", "nuevo_prototipo", "probar_prototipo", "balance_prototipo", "revisar_estilo",
+  ]);
+  const llamar = async (name: string, args: object) => (await pedir({ jsonrpc: "2.0", id: 3, method: "tools/call", params: { name, arguments: args } })).result;
+  const texto = async (name: string, args: object) => JSON.parse((await llamar(name, args)).content[0].text);
+  const b = await texto("buscar_mecanica", { consulta: "retroceso dispersion", limite: 3 });
   assert.equal(b.mecanicas[0].espacio, "disparos");
-  const c = JSON.parse(llamar("crear_modelo", { modelos: ["shooter-extraccion"] }).content[0].text);
+  const c = await texto("crear_modelo", { modelos: ["shooter-extraccion"] });
   assert.equal(c.arte.dimension, "3d");
   assert.ok(c.plan.length > 3);
-  const r = JSON.parse(llamar("crear_modelo", { respuestas: { nucleo: ["cuerpo-a-cuerpo"], perspectiva: "lateral" } }).content[0].text);
+  const r = await texto("crear_modelo", { respuestas: { nucleo: ["cuerpo-a-cuerpo"], perspectiva: "lateral" } });
   assert.equal(r.arte.dimension, "2d");
   assert.ok(r.sugeridos.length > 0);
-  const v = llamar("verificar_juego", { juego: "no-existe-esta-carpeta" });
-  assert.match(v.content[0].text, /falta txnucleo.recursos.json/);
-  const est = llamar("estado_juego", { juego: "no-existe-esta-carpeta" });
+  assert.match((await llamar("verificar_juego", { juego: "no-existe-esta-carpeta" })).content[0].text, /falta txnucleo.recursos.json/);
+  const est = await llamar("estado_juego", { juego: "no-existe-esta-carpeta" });
   assert.ok(est.isError && /iniciar/.test(est.content[0].text), "sin proyecto: el error dice cómo iniciarlo");
-  assert.equal(atender({ jsonrpc: "2.0", id: 9, method: "tools/call", params: { name: "nada" } })!.error.code, -32602);
-  assert.equal(atender({ jsonrpc: "2.0", id: 9, method: "otro" })!.error.code, -32601);
+  assert.ok((await llamar("balance_prototipo", { juego: "no-existe-esta-carpeta" })).isError);
+  assert.equal((await pedir({ jsonrpc: "2.0", id: 9, method: "tools/call", params: { name: "nada" } })).error.code, -32602);
+  assert.equal((await pedir({ jsonrpc: "2.0", id: 9, method: "otro" })).error.code, -32601);
 });

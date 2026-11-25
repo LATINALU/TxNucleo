@@ -28,12 +28,17 @@ por contratos JSON neutros a motores. Uso: [USO.md](USO.md) · referencia: [RED.
 - MCP `txnucleo` (11 herramientas), 3 skills, importador Godot probado, guía de OhMyGame.
 - Documentación: USO.md (personas), IA.md §15 (agentes), RED.md (referencia).
 
+## 0.6.0: de una idea a un juego que se juega (hecha)
+
+`txn nuevo "<idea>"` → prototipo jugable en Godot y web en ~10 s, reglas horneadas, arte desde datos, bot con
+paridad exacta entre motores, `txn probar | balance | rehornear | variantes | jugar | informe`. Ver
+[HORNEADO.md](HORNEADO.md).
+
 ## Próximas versiones
 
 | Versión | Contenido |
 |---|---|
-| 0.6 | `red vigilar`: reconstruir al guardar una fuente. `red comparar` con r2g (captura del juego vs referencia, lado a lado). Plantillas `.px.js` con animaciones base (quieto, caminar, golpe). |
-| 0.7 | Blender por CLI-Anything probado: revisar y convertir GLB/FBX/OBJ al contrato `Modelo3D`. Importadores probados para Unity (glTFast + hojas) y web (Three.js, en navegador). |
-| 0.8 | Plugin propio de OhMyGame (`contributes.mcpServers` + skill) para que TxNucleo aparezca sin configurar. Registrar en el manifiesto lo que genera OhMyGame. |
-| 0.9 | Contratos de audio (`BancoSonidos` ↔ archivos, Audacity por CLI-Anything) y de niveles (Tiled/LDtk → `mundo`). |
-| 1.0 | API de contratos estable, validador también en Rust, guía de publicación del juego (exportar con CLI-Anything). |
+| 0.7 | Más plantillas jugables: **plataformas lateral** y **3D en tercera persona** (con modelos kiln), elegidas por la perspectiva de la idea. `txn vigilar`: reconstruir y recargar al guardar. |
+| 0.8 | `txn comparar`: captura del juego vs referencia de estilo con reference-to-game. Animaciones base en el arte de plantilla (caminar, golpe). Bot con objetivos por género. |
+| 0.9 | Blender por CLI-Anything; importadores probados para Unity y web 3D; plugin propio de OhMyGame. |
+| 1.0 | Medición pública de productividad: la misma idea con y sin TxNucleo, cronometrada y documentada. API de contratos estable. |

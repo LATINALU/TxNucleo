@@ -1,6 +1,6 @@
 {
   "name": "txnucleo",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Librería de MECÁNICAS de videojuegos para cualquier género (RPG de acción, MMO, MOBA, shooters 3D, extracción, supervivencia, zombis, carreras, estrategia, turnos, cartas, plataformas...): reglas puras sin números de ningún juego, curvas de escalado sin tope, 58 modelos combinables, asistente de preguntas, catálogos de datos propios y netcode. Centro de una red de herramientas (reference-to-game, claude-pxl, Kiln, CLI-Anything, OhMyGame) con contratos JSON neutros a motores, servidor MCP y skills.",
   "type": "module",
   "main": "src/index.ts",
@@ -32,12 +32,16 @@
     "rendimiento": "node ejemplos/rendimiento.ts",
     "red": "node herramientas/red.ts",
     "mcp": "node mcp/servidor.ts",
-    "ejemplo:red": "node ejemplos/red-prototipo/prototipo.ts"
+    "ejemplo:red": "node ejemplos/red-prototipo/prototipo.ts",
+    "txn": "node herramientas/txn.ts"
   },
   "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "devDependencies": {
     "@types/node": "^22.19.1",
     "typescript": "^5.9.3"
+  },
+  "bin": {
+    "txn": "herramientas/txn.ts"
   }
 }

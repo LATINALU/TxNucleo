@@ -3,3 +3,4 @@
 
 export * from "./enlaces.ts";
 export * from "./proyecto-red.ts";
+export * from "./nuevo.ts";

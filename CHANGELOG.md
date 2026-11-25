@@ -3,6 +3,26 @@
 Formato: una sección por versión, la más nueva arriba. Versiones con [SemVer](https://semver.org/lang/es/): antes
 de 1.0 puede cambiar la API de los contratos entre versiones menores (0.x).
 
+## 0.6.0 (25 nov 2026)
+
+De una idea a un juego que se juega.
+
+- **`txn`**: comando único (`npm link`), con bitácora de duración por comando en cada juego.
+- **`txn nuevo "<idea>"`**: intérprete de ideas en lenguaje natural (`modelos.interpretarIdea`) → modelos
+  combinados → **reglas horneadas** (`enlaces.hornearReglas`: tablas por nivel calculadas con `ModeloBalance`,
+  curvas de experiencia, rareza y arquetipos) → **arte desde los datos** (`enlaces.arteDePlantilla`: un enemigo
+  por tipo, un cofre por rareza) → plantilla jugable **acción cenital en Godot y web** → construir → bot.
+  Medido: ~10 s de idea a prototipo jugable con pxl instalado.
+- **Misma partida en dos motores**: `simulacion.js` y `simulacion.gd` comparten lógica y azar; `herramientas/paridad.ts`
+  (en `verificar.sh`) exige resultados idénticos.
+- **`txn probar`** (bot sin pantalla, `--godot`, `--captura`), **`txn balance`** (`enlaces.analizarBalance`),
+  **`txn rehornear`**, **`txn variantes armas`** (modelos kiln a escala por arma del catálogo), **`txn jugar`**
+  (Godot o servidor web local), **`txn informe`** (HTML con lo hecho y medido).
+- Modo prototipo del horneado con **ajuste de multitud** medido con el bot (`docs/HORNEADO.md`).
+- MCP: `nuevo_prototipo`, `probar_prototipo`, `balance_prototipo` (14 herramientas).
+- `construir` separa avisos (Godot no encontrado) de errores.
+- Docs: `docs/HORNEADO.md`, `docs/IA.md` §16, `docs/USO.md` con `txn`.
+
 ## 0.5.0 (25 nov 2026)
 
 Primera versión de TxNucleo. Continúa *ludokit* (mismo autor) y lo convierte en el centro de una red de

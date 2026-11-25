@@ -10,3 +10,5 @@ export * as r2g from "./adaptadores/r2g.ts";
 export * as cliAnything from "./adaptadores/cli-anything.ts";
 export * from "./plan-arte.ts";
 export * from "./proyecto.ts";
+export * from "./horneado.ts";
+export * from "./arte-plantilla.ts";

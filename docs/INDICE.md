@@ -2,7 +2,7 @@
 
 > Generado por `npm run indice` desde el código. No editar a mano.
 
-**38 espacios de nombres · 160 archivos · 924 exportaciones · 58 modelos · 12 preguntas del asistente.**
+**38 espacios de nombres · 163 archivos · 947 exportaciones · 58 modelos · 12 preguntas del asistente.**
 
 Cómo usar este índice:
 
@@ -2206,6 +2206,17 @@ PIEZAS de reglas reutilizables (configuraciones ya armadas) con las que se const
 | `CAPTURA_BASE` | const |  |
 | `ZONA_BATALLA_REAL` | const |  |
 
+#### `src/modelos/idea.ts`
+
+Intérprete de ideas:
+
+| exportación | tipo | descripción |
+|---|---|---|
+| `Coincidencia` | interface | Una respuesta deducida y la palabra que la activó. |
+| `IdeaInterpretada` | interface | Resultado de interpretar una idea. |
+| `normalizarTexto` | function | Preguntas que la frase no respondió (el asistente usa lo más común). */ readonly sinRespuesta: readonly string[]; } /** Preguntas de respuesta múltiple (las demás guardan la primera coincidencia). */  |
+| `interpretarIdea` | function | Interpreta una frase libre. Una raíz de una palabra coincide al inicio de cualquier palabra; una raíz de varias palabras debe aparecer completa. Las preguntas simples se quedan con la primera coincide |
+
 ### `enlaces`
 
 `import { enlaces } from "txnucleo"`
@@ -2330,3 +2341,36 @@ Proyecto de red de un juego (`txnucleo.red.json` en su raíz):
 | `ColorAjeno` | interface | Un color de la imagen que no está en la paleta. |
 | `RevisionEstilo` | interface | Resultado de cruzar una imagen con la paleta del estilo. |
 | `revisarColores` | function | Fracción de píxeles visibles fuera de la paleta (0..1). */ readonly fraccionAjena: number; /** Los colores ajenos más usados (máx. 12), con el rol de la paleta más parecido. */ readonly colores: reado |
+
+#### `src/enlaces/horneado.ts`
+
+Reglas horneadas:
+
+| exportación | tipo | descripción |
+|---|---|---|
+| `StatsHorneadas` | interface | Estadísticas efectivas de un enemigo en un nivel: ya incluyen defensa y mitigación. |
+| `EnemigoHorneado` | interface | Daño que hace al jugador típico de ese nivel por golpe (tras su defensa). */ readonly danio: number; /** Daño que recibe por cada golpe del jugador típico de ese nivel (tras la defensa del enemigo). * |
+| `OleadaHorneada` | interface | Velocidad en casillas por segundo. */ readonly velocidad: number; /** Alcance de ataque en casillas. */ readonly alcance: number; readonly distancia: boolean; readonly costo: number; readonly peso: nu |
+| `ReglasHorneadas` | interface | Todo lo que un motor necesita para jugar las reglas de la combinación. |
+| `OpcionesHorneado` | interface | "prototipo": experiencia para subir derivada de la del enemigo (≈8 + 1,5·nivel enemigos); "modelo": la curva del modelo. */ readonly progresion: "prototipo" \| "modelo"; /** Solo en modo prototipo: mu |
+| `AJUSTE_MULTITUD` | const | Familia de enemigos del catálogo (zombi, soldado, fantasia, bestia, maquina); si no, se deduce de los modelos. */ readonly familia?: Arquetipo["familia"]; /** "prototipo" (por defecto): subir de nivel |
+| `armaDe` | function | ¿El jugador ataca a distancia? Por los rasgos de los modelos: disparar + habilidades ≥ cuerpo a cuerpo. |
+| `familiaDe` | function | Familia de enemigos según los modelos y géneros de la combinación. |
+| `hornearReglas` | function | Hornea las reglas de una combinación en tablas para cualquier motor. Determinista con la semilla. |
+| `AvisoBalance` | interface | Un aviso del análisis de balance. |
+| `FilaBalance` | interface | Fila del análisis por nivel. |
+| `analizarBalance` | function | Golpes del jugador para matar al enemigo más común. */ readonly golpesParaMatar: number; /** Segundos para matarlo al ritmo del jugador. */ readonly segundosParaMatar: number; /** Golpes del enemigo m |
+
+#### `src/enlaces/arte-plantilla.ts`
+
+Arte de partida generado DESDE LOS DATOS:
+
+| exportación | tipo | descripción |
+|---|---|---|
+| `PaletaPlantilla` | interface | Seis colores con función: contorno, sombra, cuerpo, luz, acento, ojo/brillo. |
+| `PALETAS_FAMILIA` | const | Paletas propias por familia de enemigos (cuando el juego aún no tiene contrato de estilo). |
+| `mezclar` | function | Mezcla perceptual de dos colores hex (t = 0 → a, 1 → b). |
+| `girarTono` | function | Gira el tono de un color en OKLab (grados), conservando luminosidad y croma. |
+| `paletaDesdeEstilo` | function | Paleta de plantilla desde un contrato de estilo: el más oscuro es el contorno, el más claro el brillo, el de más croma entre los medios el acento y otro medio el cuerpo; sombra y luz se derivan si fal |
+| `arteDePlantilla` | function | Teclas de un carácter para las variantes (pxl usa un carácter por color). */ const TECLAS_ENEMIGO = ["1", "2", "3", "4", "5", "6"]; const TECLAS_SOMBRA = ["E", "F", "G", "H", "I", "J"]; const TECLAS_R |
+| `spriteDeEnemigo` | const | Nombre del sprite de un enemigo en la hoja (el que buscan las plantillas). |

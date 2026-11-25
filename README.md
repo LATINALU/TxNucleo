@@ -1,5 +1,14 @@
 # TxNucleo
 
+```bash
+txn nuevo "un roguelite de zombis con armas, visto desde arriba"
+```
+
+**De una frase a un juego que se juega en ~10 segundos**, en Godot y en el navegador a la vez: reglas calculadas con
+mecánicas probadas, arte generado desde los datos, un bot que lo juega y lo mide, y la **misma partida, idéntica, en
+los dos motores**. Después, todo el ciclo de desarrollo con un comando: `txn estado · construir · probar · balance ·
+informe`. Cómo funciona: [docs/HORNEADO.md](docs/HORNEADO.md) · guía: [docs/USO.md](docs/USO.md).
+
 **Una librería de mecánicas de videojuegos para cualquier género: RPG de acción, MMO, MOBA, shooters 3D,
 extracción, supervivencia, zombis, carreras, estrategia, turnos, cartas, plataformas... y las mezclas entre ellos.**
 
@@ -18,8 +27,8 @@ visual ([OhMyGame](https://github.com/WhiteTowerAI/ohmygame)). TxNucleo las inst
 ejecuta y traduce lo que producen a **contratos JSON neutros a motores** (hojas de sprites, modelos 3D, estilo,
 manifiesto de recursos). Ver la [sección 17](#17-la-red-txnucleo) y [docs/RED.md](docs/RED.md).
 
-> **¿Primera vez?** Empezá por **[docs/USO.md](docs/USO.md)**: instalar, tu primer juego 2D o 3D en 10 minutos, el
-> ciclo diario (`estado` → `construir`), qué archivo es qué y cómo trabajar con una IA.
+> **¿Primera vez?** Empezá por **[docs/USO.md](docs/USO.md)**: instalar (`npm install && npm link`), `txn nuevo`, el
+> ciclo diario (`estado` → `construir` → `probar`), qué archivo es qué y cómo trabajar con una IA.
 >
 > **¿Trabajás con un asistente de IA?** Está preparado para eso: tu IA lee [`AGENTS.md`](AGENTS.md) y
 > [`docs/IA.md`](docs/IA.md), consulta el [índice generado](docs/INDICE.md) y arma el plan con `npm run crear`. Ver la

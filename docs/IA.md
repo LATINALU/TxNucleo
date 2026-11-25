@@ -321,3 +321,24 @@ técnica: `docs/RED.md`.
 - Los procesos se lanzan sin shell; no uses `script inline` de CLI-Anything (ejecuta GDScript arbitrario).
 - Si una herramienta no está instalada, decilo y seguí con lo que sí se puede hacer (mecánicas, fuentes).
 
+## 16. Prototipos jugables: protocolo para agentes
+
+Cuando el usuario pide "hacé un juego", "un prototipo" o describe una idea, **empezá por un prototipo que se juegue**
+(`nuevo_prototipo` por MCP o `txn nuevo "<idea>"`), no por un plan en papel. Detalle técnico: `docs/HORNEADO.md`.
+
+1. **Crear**: `nuevo_prototipo { idea, salida, motor }`. Mostrale al usuario qué entendió (`entendio`: pregunta,
+   valor y palabra) y los modelos elegidos; si algo está mal, corregí la frase y generá en otra carpeta.
+2. **Probar**: `probar_prototipo` (bot sin pantalla, varias semillas). Leé `vivos`, oleada y nivel. Para Godot,
+   `txn probar --godot` confirma que la partida es idéntica en los dos motores.
+3. **Ajustar balance**: `balance_prototipo` → avisos por nivel. Los números viven en `reglas.json` y salen de las
+   mecánicas: para cambiarlos, cambiá el modelo o las opciones de horneado y `txn rehornear`; no edites a mano
+   decenas de valores.
+4. **Ajustar arte**: editá `arte/personajes.px.js` (fuente) y `construir_juego`; nunca el PNG.
+5. **Crecer**: reemplazá partes de la plantilla con módulos de TxNucleo siguiendo los "Siguientes pasos" del
+   `PLAN.md` (están en `planDeImplementacion`). Mantené la simulación pura y determinista: el bot depende de eso.
+6. **Mostrar**: `txn informe` deja `informe/index.html` con lo hecho y lo medido; ofrecelo al usuario.
+
+Reglas: el ajuste de multitud del modo prototipo está documentado en `reglas.json` (`ajusteMultitud`); no lo
+presentes como balance final. Si cambiás la lógica de `simulacion.js`, cambiá igual `simulacion.gd` y corré
+`node herramientas/paridad.ts` (necesita Godot).
+

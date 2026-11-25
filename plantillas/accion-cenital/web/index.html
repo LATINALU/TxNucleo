@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{NOMBRE}} · prototipo TxNucleo</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #0c0d11; color: #c8cad2; font: 13px system-ui, sans-serif; }
+    body { display: grid; place-items: center; gap: 8px; align-content: center; }
+    canvas { width: min(96vw, 1280px); aspect-ratio: 40 / 24; image-rendering: pixelated; border: 1px solid #262a35; }
+    p { margin: 0; opacity: .75; }
+  </style>
+</head>
+<body>
+  <canvas id="juego"></canvas>
+  <p>WASD / flechas: mover · Espacio: esquivar · R: reiniciar · B: bot · Reglas horneadas por TxNucleo desde {{MODELOS}}</p>
+  <script type="module" src="juego.js"></script>
+</body>
+</html>

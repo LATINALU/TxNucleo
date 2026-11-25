@@ -13,9 +13,12 @@ import {
   revisarEstilo, verificarGodot, verificarManifiesto,
 } from "../src/infraestructura/enlaces-node.ts";
 import { existsSync } from "node:fs";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { nuevoJuego } from "../src/infraestructura/nuevo.ts";
+import { analizarBalance } from "../src/enlaces/index.ts";
 import { basename, dirname, join, relative, resolve } from "node:path";
 
-const VERSION = "0.5.0";
+const VERSION = "0.6.0";
 const PROTOCOLO = "2025-06-18";
 
 type Json = Record<string, any>;
@@ -24,7 +27,7 @@ type Json = Record<string, any>;
 interface HerramientaMcp {
   readonly descripcion: string;
   readonly entrada: Json;
-  readonly correr: (a: Json) => unknown;
+  readonly correr: (a: Json) => unknown | Promise<unknown>;
 }
 
 const CATALOGO = JSON.parse(readFileSync(new URL("../docs/catalogo.json", import.meta.url), "utf8"));
@@ -148,6 +151,37 @@ const HERRAMIENTAS: Record<string, HerramientaMcp> = {
     entrada: { type: "object", properties: { juego: { type: "string" }, todo: { type: "boolean" } }, required: ["juego"] },
     correr: (a) => construirJuego(a.juego, { todo: !!a.todo }),
   },
+  nuevo_prototipo: {
+    descripcion: "De una idea en lenguaje natural a un PROTOTIPO JUGABLE en una carpeta nueva: interpreta la idea, combina modelos, hornea reglas.json, genera el arte desde los datos (pxl), copia la plantilla (Godot, web o ambas), construye y prueba con un bot. Devuelve qué entendió, los modelos y lo que midió el bot.",
+    entrada: { type: "object", properties: { idea: { type: "string" }, salida: { type: "string", description: "Carpeta nueva o vacía" }, motor: { type: "string", enum: ["godot", "web", "ambos"] }, nombre: { type: "string" }, referencia: { type: "string", description: "Imagen de referencia para el estilo (opcional)" } }, required: ["idea", "salida"] },
+    correr: async (a) => {
+      const r = await nuevoJuego(a.idea, { salida: a.salida, ...(a.motor ? { motor: a.motor } : {}), ...(a.nombre ? { nombre: a.nombre } : {}), ...(a.referencia ? { referencia: a.referencia } : {}) });
+      return r.ok ? { ok: true, valor: { carpeta: r.valor.carpeta, entendio: r.valor.idea.coincidencias, modelos: r.valor.combinacion.ids, arma: r.valor.arma, familia: r.valor.familia, motor: r.valor.motor, arteConstruido: r.valor.arteConstruido, bot: r.valor.bot, avisosBalance: r.valor.avisosBalance, siguiente: "Leer PLAN.md; jugar con `txn jugar`; ajustar fuentes y `construir_juego`; `probar_prototipo`." } } : r;
+    },
+  },
+  probar_prototipo: {
+    descripcion: "El bot juega el prototipo sin pantalla con la misma simulación y reglas.json del juego (varias semillas) y devuelve métricas: si sobrevive, oleada, nivel, bajas, botín.",
+    entrada: { type: "object", properties: { juego: { type: "string" }, segundos: { type: "number" }, semillas: { type: "number" } }, required: ["juego"] },
+    correr: async (a) => {
+      const juego = resolve(a.juego);
+      if (!existsSync(join(juego, "reglas.json"))) return { ok: false, error: "no hay reglas.json (¿es un prototipo de nuevo_prototipo?)" };
+      const reglas = JSON.parse(readFileSync(join(juego, "reglas.json"), "utf8"));
+      const ruta = existsSync(join(juego, "web", "simulacion.js")) ? join(juego, "web", "simulacion.js") : fileURLToPath(new URL("../plantillas/accion-cenital/web/simulacion.js", import.meta.url));
+      const sim = await import(pathToFileURL(ruta).href);
+      const partidas = Array.from({ length: a.semillas ?? 5 }, (_, i) => sim.probarConBot(JSON.parse(JSON.stringify(reglas)), a.segundos ?? 120, i + 1));
+      return { vivos: partidas.filter((p: { vivo: boolean }) => p.vivo).length, partidas };
+    },
+  },
+  balance_prototipo: {
+    descripcion: "Analiza reglas.json por nivel: golpes y segundos para matar a un común, golpes que aguanta el jugador, enemigos para subir de nivel, duración del jefe, y avisos fuera de rango.",
+    entrada: { type: "object", properties: { juego: { type: "string" } }, required: ["juego"] },
+    correr: (a) => {
+      const p = join(resolve(a.juego), "reglas.json");
+      if (!existsSync(p)) return { ok: false, error: "no hay reglas.json" };
+      const r = analizarBalance(JSON.parse(readFileSync(p, "utf8")));
+      return { avisos: r.avisos, filas: r.filas.filter((f) => f.nivel === 1 || f.nivel % 5 === 0) };
+    },
+  },
   revisar_estilo: {
     descripcion: "Cruza cada PNG de sprites del juego con la paleta del estilo (OKLab, tolerancia del proyecto): fracción de píxeles fuera de la paleta y los colores ajenos con su rol más cercano.",
     entrada: { type: "object", properties: { juego: { type: "string" } }, required: ["juego"] },
@@ -156,7 +190,7 @@ const HERRAMIENTAS: Record<string, HerramientaMcp> = {
 };
 
 /** Atiende un mensaje JSON-RPC y devuelve la respuesta (o null para notificaciones). */
-export function atender(m: Json): Json | null {
+export async function atender(m: Json): Promise<Json | null> {
   const ok = (result: unknown): Json => ({ jsonrpc: "2.0", id: m.id, result });
   const error = (code: number, message: string): Json => ({ jsonrpc: "2.0", id: m.id ?? null, error: { code, message } });
   if (m.id === undefined) return null; // notificación (initialized, cancelled...)
@@ -171,7 +205,7 @@ export function atender(m: Json): Json | null {
       const h = HERRAMIENTAS[m.params?.name];
       if (!h) return error(-32602, `herramienta desconocida: ${m.params?.name}`);
       try {
-        const r = h.correr(m.params?.arguments ?? {}) as Json;
+        const r = (await h.correr(m.params?.arguments ?? {})) as Json;
         const fallo = r && typeof r === "object" && r.ok === false;
         return ok({ content: [{ type: "text", text: JSON.stringify(fallo ? { error: r.error } : r && r.ok === true ? r.valor : r, null, 2) }], isError: !!fallo });
       } catch (e) {
@@ -185,7 +219,7 @@ export function atender(m: Json): Json | null {
 
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/").split("/").pop()!)) {
   const rl = createInterface({ input: process.stdin });
-  rl.on("line", (linea) => {
+  rl.on("line", async (linea) => {
     if (!linea.trim()) return;
     let m: Json;
     try {
@@ -194,7 +228,7 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "
       process.stdout.write(JSON.stringify({ jsonrpc: "2.0", id: null, error: { code: -32700, message: "JSON inválido" } }) + "\n");
       return;
     }
-    const r = atender(m);
+    const r = await atender(m);
     if (r) process.stdout.write(JSON.stringify(r) + "\n");
   });
 }

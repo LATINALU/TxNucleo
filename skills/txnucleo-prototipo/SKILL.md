@@ -9,10 +9,17 @@ TxNucleo trae las **mecánicas** (reglas puras, 58 modelos de género combinable
 herramientas** para el arte y el motor. Manual completo: `docs/IA.md` (sección 15 = protocolo de la red);
 guía humana: `docs/USO.md`.
 
-Las acciones existen como MCP (`txnucleo`) y como CLI (`npm --prefix <TxNucleo> run red -- <comando>` desde la
+Las acciones existen como MCP (`txnucleo`) y como CLI (`txn <comando>` desde la
 carpeta del juego). Usá el MCP si está conectado.
 
-## Flujo
+## Lo primero: un prototipo que se juegue
+
+Ante una idea de juego, generá un prototipo jugable ANTES de planificar en papel:
+`nuevo_prototipo { idea, salida, motor: "ambos" }` (o `txn nuevo "<idea>"`). En ~10 s queda un juego en Godot y
+web con reglas horneadas, arte desde datos y un bot que lo probó. Mostrá qué entendió y lo que midió el bot;
+después `probar_prototipo`, `balance_prototipo`, editar fuentes y `construir_juego`. Protocolo: `docs/IA.md` §16.
+
+## Flujo detallado (otro género, otro motor, o crecer el prototipo)
 
 1. **Mecánicas.** `buscar_mecanica` antes de escribir cualquier regla. Combinar con `crear_modelo`, o
    `npm run crear -- --salida <juego> --motor godot` (escribe `PLAN.md`, `txnucleo.juego.json` y

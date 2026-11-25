@@ -113,6 +113,7 @@ switch (cmd) {
     const i = r.valor;
     console.log(`\nConstruidas: ${i.construidas.length} · al día: ${i.alDia.length}`);
     for (const e of i.errores) console.log(`  ✗ ${e}`);
+    for (const a of i.avisos) console.log(`  ! ${a}`);
     if (i.estilo.length) { console.log("Estilo:"); imprimirEstilo(i.estilo); }
     if (i.godot) console.log(`Godot: ${i.godot.escenas.length} escenas, ${i.godot.scriptsInvalidos.length ? i.godot.scriptsInvalidos.map((s) => `✗ ${s.script}: ${s.error}`).join("; ") : "scripts válidos"}`);
     for (const m of i.manifiesto) console.log(`  ✗ manifiesto: ${m}`);

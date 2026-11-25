@@ -30,6 +30,8 @@ if ($env:GODOT) {
   Paso "Godot: importadores de contratos de la red (integraciones/godot)"
   & $env:GODOT --headless --path "$PSScriptRoot/integraciones/godot" --import --quit *> $null
   & $env:GODOT --headless --path "$PSScriptRoot/integraciones/godot" --script res://prueba.gd; if ($LASTEXITCODE -ne 0) { $fallos++ }
+  Paso "Prototipos: la misma partida en JS y en Godot (txn nuevo + bot)"
+  node "$PSScriptRoot/herramientas/paridad.ts"; if ($LASTEXITCODE -ne 0) { $fallos++ }
 }
 
 if (Get-Command python -ErrorAction SilentlyContinue) {

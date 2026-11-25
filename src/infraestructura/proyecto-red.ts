@@ -15,7 +15,7 @@ import {
 } from "../enlaces/proyecto.ts";
 import type { InformeGodot } from "../enlaces/adaptadores/cli-anything.ts";
 import {
-  archivosCon, doctor, generarModelo, generarSprites, leerManifiesto, MANIFIESTO, registrarRecursos, reimportarGodot,
+  archivosCon, detectar, doctor, generarModelo, generarSprites, leerManifiesto, MANIFIESTO, registrarRecursos, reimportarGodot,
   sha256Archivo, verificarGodot, verificarManifiesto,
 } from "./enlaces.ts";
 
@@ -120,6 +120,8 @@ export interface InformeConstruccion {
   readonly construidas: readonly string[];
   readonly alDia: readonly string[];
   readonly errores: readonly string[];
+  /** Pasos omitidos que no son errores (p. ej. Godot no encontrado: no se verificó el proyecto). */
+  readonly avisos: readonly string[];
   readonly estilo: readonly { imagen: string; revision: RevisionEstilo }[];
   readonly godot: InformeGodot | null;
   readonly manifiesto: readonly string[];
@@ -167,7 +169,11 @@ export function construirJuego(juego: string, op: { todo?: boolean; log?: (s: st
   const estilo = revisarEstilo(raiz);
   if (!estilo.ok) errores.push(estilo.error);
   let godotInf: InformeGodot | null = null;
-  if (proyecto.motor === "godot" && existsSync(join(raiz, "project.godot")) && doctor(["cli-anything-godot"]).herramientas[0]!.instalada) {
+  const avisos: string[] = [];
+  const conGodot = proyecto.motor === "godot" && existsSync(join(raiz, "project.godot"));
+  if (conGodot && !doctor(["cli-anything-godot"]).herramientas[0]!.instalada) avisos.push("Godot no verificado: falta cli-anything-godot (txn instalar cli-anything-godot)");
+  else if (conGodot && !detectar("godot")) avisos.push("Godot no verificado: no se encontró el ejecutable (definí GODOT_BIN)");
+  else if (conGodot) {
     if (construidas.length) {
       log("· Godot: reimportar recursos");
       const ri = reimportarGodot(raiz);
@@ -178,7 +184,7 @@ export function construirJuego(juego: string, op: { todo?: boolean; log?: (s: st
     else errores.push(`godot: ${g.error}`);
   }
   return exito({
-    construidas, alDia, errores,
+    construidas, alDia, errores, avisos,
     estilo: estilo.ok ? estilo.valor : [],
     godot: godotInf,
     manifiesto: existsSync(join(raiz, MANIFIESTO)) ? verificarManifiesto(raiz) : [],

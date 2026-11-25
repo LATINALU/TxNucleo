@@ -38,6 +38,8 @@ if [ -n "${GODOT:-}" ]; then
   paso "Godot: importadores de contratos de la red (integraciones/godot)"
   "$GODOT" --headless --path integraciones/godot --import --quit >/dev/null 2>&1
   "$GODOT" --headless --path integraciones/godot --script res://prueba.gd || fallos=$((fallos + 1))
+  paso "Prototipos: la misma partida en JS y en Godot (txn nuevo + bot)"
+  node herramientas/paridad.ts || fallos=$((fallos + 1))
 fi
 
 if command -v python >/dev/null || command -v python3 >/dev/null; then
