@@ -4,7 +4,7 @@
 txn nuevo "un roguelite de zombis con armas, visto desde arriba"
 ```
 
-**De una frase a un juego que se juega en ~10 segundos**, en Godot y en el navegador a la vez: reglas calculadas con
+**De una frase a un juego que se juega en ~30 Minutos**, en Godot y en el navegador a la vez: reglas calculadas con
 mecánicas probadas, arte generado desde los datos, un bot que lo juega y lo mide, y la **misma partida, idéntica, en
 los dos motores**. Después, todo el ciclo de desarrollo con un comando: `txn estado · construir · probar · balance ·
 informe`. Cómo funciona: [docs/HORNEADO.md](docs/HORNEADO.md) · guía: [docs/USO.md](docs/USO.md).
