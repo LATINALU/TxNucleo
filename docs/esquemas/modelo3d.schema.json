@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "txnucleo.modelo3d.v1",
+  "title": "Modelo3D",
+  "description": "Ficha de un .glb: medidas, nodos, colisión sugerida y etiquetas de juego. Además: caja.min <= caja.max.",
+  "type": "object",
+  "required": [
+    "version",
+    "glb",
+    "bytes",
+    "unidades",
+    "ejes",
+    "caja",
+    "triangulos",
+    "nodos",
+    "materiales",
+    "parametros",
+    "colision",
+    "etiquetas",
+    "qa",
+    "avisos",
+    "origen"
+  ],
+  "properties": {
+    "version": {
+      "const": "txnucleo.modelo3d.v1"
+    },
+    "glb": {
+      "allOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![a-zA-Z]:)(?!/)(?!.*(^|/)\\.\\.(/|$)).+$",
+          "description": "Ruta relativa sin '..'"
+        },
+        {
+          "type": "string",
+          "pattern": "\\.[gG][lL][bB]$"
+        }
+      ]
+    },
+    "bytes": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "unidades": {
+      "const": "m"
+    },
+    "ejes": {
+      "type": "object",
+      "required": [
+        "arriba",
+        "adelante"
+      ],
+      "properties": {
+        "arriba": {
+          "type": "string"
+        },
+        "adelante": {
+          "type": "string"
+        }
+      }
+    },
+    "caja": {
+      "type": "object",
+      "required": [
+        "min",
+        "max",
+        "tamano",
+        "centro"
+      ],
+      "properties": {
+        "min": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "max": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "tamano": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "centro": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "triangulos": {
+      "type": "number",
+      "minimum": 0
+    },
+    "nodos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "materiales": {
+      "type": "number",
+      "minimum": 0
+    },
+    "parametros": {
+      "type": "object"
+    },
+    "colision": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "forma",
+            "tamano",
+            "centro"
+          ],
+          "properties": {
+            "forma": {
+              "const": "caja"
+            },
+            "tamano": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "centro": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "forma",
+            "radio",
+            "alto",
+            "centro"
+          ],
+          "properties": {
+            "forma": {
+              "const": "capsula"
+            },
+            "radio": {
+              "type": "number"
+            },
+            "alto": {
+              "type": "number"
+            },
+            "centro": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "forma",
+            "radio",
+            "centro"
+          ],
+          "properties": {
+            "forma": {
+              "const": "esfera"
+            },
+            "radio": {
+              "type": "number"
+            },
+            "centro": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          }
+        }
+      ]
+    },
+    "etiquetas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "qa": {
+      "enum": [
+        "aprobado",
+        "rechazado",
+        "desconocido"
+      ]
+    },
+    "avisos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "origen": {
+      "type": "object",
+      "required": [
+        "herramienta"
+      ],
+      "properties": {
+        "herramienta": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fuente": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "fuenteSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

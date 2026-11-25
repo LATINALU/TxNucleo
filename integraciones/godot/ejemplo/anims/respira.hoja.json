@@ -1,0 +1,43 @@
+{
+  "version": "txnucleo.hoja.v1",
+  "imagen": "respira.png",
+  "ancho": 28,
+  "alto": 7,
+  "cuadros": [
+    {
+      "nombre": "respira_0",
+      "x": 0,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+    },
+    {
+      "nombre": "respira_1",
+      "x": 14,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+    }
+  ],
+  "animaciones": [
+    {
+      "nombre": "respira",
+      "desde": 0,
+      "hasta": 1,
+      "bucle": true,
+      "ms": [
+        250,
+        250
+      ]
+    }
+  ],
+  "pivote": [
+    0.5,
+    1
+  ],
+  "origen": {
+    "herramienta": "pxl"
+  }
+}

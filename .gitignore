@@ -1,0 +1,5 @@
+node_modules/
+*.tmp
+ejemplos/salida/
+mi-juego/
+.kiln/

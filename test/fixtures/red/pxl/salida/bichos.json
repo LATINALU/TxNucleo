@@ -1,0 +1,74 @@
+{
+ "frames": {
+  "bicho": {
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 14,
+    "h": 7
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 14,
+    "h": 7
+   },
+   "sourceSize": {
+    "w": 14,
+    "h": 7
+   }
+  },
+  "bicho_rojo": {
+   "frame": {
+    "x": 15,
+    "y": 0,
+    "w": 14,
+    "h": 7
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 14,
+    "h": 7
+   },
+   "sourceSize": {
+    "w": 14,
+    "h": 7
+   }
+  },
+  "gema": {
+   "frame": {
+    "x": 30,
+    "y": 0,
+    "w": 7,
+    "h": 6
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 7,
+    "h": 6
+   },
+   "sourceSize": {
+    "w": 7,
+    "h": 6
+   }
+  }
+ },
+ "meta": {
+  "app": "pxl",
+  "image": "bichos.png",
+  "format": "RGBA8888",
+  "size": {
+   "w": 37,
+   "h": 7
+  },
+  "scale": "1"
+ }
+}

@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "txnucleo.hoja.v1",
+  "title": "HojaSprites",
+  "description": "Hoja de sprites neutra a motores (src/enlaces/contratos.ts). Además: cada cuadro dentro de la imagen; animaciones dentro de los cuadros con un ms por cuadro.",
+  "type": "object",
+  "required": [
+    "version",
+    "imagen",
+    "ancho",
+    "alto",
+    "cuadros",
+    "animaciones",
+    "pivote",
+    "origen"
+  ],
+  "properties": {
+    "version": {
+      "const": "txnucleo.hoja.v1"
+    },
+    "imagen": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![a-zA-Z]:)(?!/)(?!.*(^|/)\\.\\.(/|$)).+$",
+      "description": "Ruta relativa sin '..'"
+    },
+    "ancho": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "alto": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "cuadros": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "nombre",
+          "x",
+          "y",
+          "w",
+          "h"
+        ],
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "minLength": 1
+          },
+          "x": {
+            "type": "number",
+            "minimum": 0
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0
+          },
+          "w": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "h": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "ms": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        }
+      }
+    },
+    "animaciones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "nombre",
+          "desde",
+          "hasta",
+          "bucle",
+          "ms"
+        ],
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "minLength": 1
+          },
+          "desde": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "hasta": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "bucle": {
+            "type": "boolean"
+          },
+          "ms": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        }
+      }
+    },
+    "pivote": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "origen": {
+      "type": "object",
+      "required": [
+        "herramienta"
+      ],
+      "properties": {
+        "herramienta": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fuente": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "fuenteSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

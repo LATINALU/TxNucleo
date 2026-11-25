@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "txnucleo.red.v1",
+  "title": "ProyectoRed",
+  "description": "txnucleo.red.json en la raíz del juego: carpetas de fuentes de arte, estilo, motor y licencia (src/enlaces/proyecto.ts).",
+  "type": "object",
+  "required": [
+    "version",
+    "nombre",
+    "motor",
+    "estilo",
+    "arte2d",
+    "arte3d",
+    "licencia",
+    "sinBucle",
+    "toleranciaColor"
+  ],
+  "properties": {
+    "version": {
+      "const": "txnucleo.red.v1"
+    },
+    "nombre": {
+      "type": "string",
+      "minLength": 1
+    },
+    "motor": {
+      "enum": [
+        "godot",
+        "web",
+        "unity",
+        "unreal",
+        "otro"
+      ]
+    },
+    "estilo": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![a-zA-Z]:)(?!/)(?!.*(^|/)\\.\\.(/|$)).+$"
+        }
+      ]
+    },
+    "arte2d": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![a-zA-Z]:)(?!/)(?!.*(^|/)\\.\\.(/|$)).+$"
+    },
+    "arte3d": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![a-zA-Z]:)(?!/)(?!.*(^|/)\\.\\.(/|$)).+$"
+    },
+    "licencia": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sinBucle": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "toleranciaColor": {
+      "type": "number",
+      "minimum": 0
+    }
+  }
+}

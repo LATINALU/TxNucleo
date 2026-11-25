@@ -1,0 +1,65 @@
+{
+  "version": "txnucleo.modelo3d.v1",
+  "glb": "caja.glb",
+  "bytes": 3084,
+  "sha256": "860742e3a5541f99538993164b536ed8686eecd0f67cd039e350de6330934fa7",
+  "unidades": "m",
+  "ejes": {
+    "arriba": "+Y",
+    "adelante": "+X"
+  },
+  "caja": {
+    "min": [
+      -0.306,
+      0,
+      -0.306
+    ],
+    "max": [
+      0.306,
+      0.42,
+      0.306
+    ],
+    "tamano": [
+      0.612,
+      0.42,
+      0.612
+    ],
+    "centro": [
+      0,
+      0.21,
+      0
+    ]
+  },
+  "triangulos": 24,
+  "nodos": [
+    "CajaSuministros",
+    "Mesh_Cuerpo",
+    "Mesh_Banda"
+  ],
+  "materiales": 2,
+  "parametros": {
+    "lado": 0.6,
+    "color": "#6b5a3a"
+  },
+  "colision": {
+    "forma": "caja",
+    "tamano": [
+      0.612,
+      0.42,
+      0.612
+    ],
+    "centro": [
+      0,
+      0.21,
+      0
+    ]
+  },
+  "etiquetas": [
+    "cobertura"
+  ],
+  "qa": "aprobado",
+  "avisos": [],
+  "origen": {
+    "herramienta": "kiln"
+  }
+}

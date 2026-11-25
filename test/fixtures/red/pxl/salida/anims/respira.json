@@ -1,0 +1,64 @@
+{
+ "frames": {
+  "respira_0": {
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 14,
+    "h": 7
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 14,
+    "h": 7
+   },
+   "sourceSize": {
+    "w": 14,
+    "h": 7
+   },
+   "duration": 250
+  },
+  "respira_1": {
+   "frame": {
+    "x": 14,
+    "y": 0,
+    "w": 14,
+    "h": 7
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 14,
+    "h": 7
+   },
+   "sourceSize": {
+    "w": 14,
+    "h": 7
+   },
+   "duration": 250
+  }
+ },
+ "meta": {
+  "app": "pxl",
+  "image": "respira.png",
+  "format": "RGBA8888",
+  "size": {
+   "w": 28,
+   "h": 7
+  },
+  "scale": "1",
+  "frameTags": [
+   {
+    "name": "respira",
+    "from": 0,
+    "to": 1,
+    "direction": "forward"
+   }
+  ]
+ }
+}

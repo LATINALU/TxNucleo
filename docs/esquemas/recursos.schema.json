@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "txnucleo.recursos.v1",
+  "title": "ManifiestoRecursos",
+  "description": "txnucleo.recursos.json en la raíz del juego: recursos con hash, origen y licencia. Además: rutas únicas.",
+  "type": "object",
+  "required": [
+    "version",
+    "recursos"
+  ],
+  "properties": {
+    "version": {
+      "const": "txnucleo.recursos.v1"
+    },
+    "recursos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "ruta",
+          "tipo",
+          "sha256",
+          "origen",
+          "licencia"
+        ],
+        "properties": {
+          "ruta": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?![a-zA-Z]:)(?!/)(?!.*(^|/)\\.\\.(/|$)).+$",
+            "description": "Ruta relativa sin '..'"
+          },
+          "tipo": {
+            "enum": [
+              "sprites",
+              "modelo3d",
+              "imagen",
+              "audio",
+              "estilo",
+              "otro"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "origen": {
+            "type": "object",
+            "required": [
+              "herramienta"
+            ],
+            "properties": {
+              "herramienta": {
+                "type": "string",
+                "minLength": 1
+              },
+              "fuente": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "fuenteSha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "licencia": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

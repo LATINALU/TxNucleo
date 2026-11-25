@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "txnucleo": {
+      "command": "node",
+      "args": ["mcp/servidor.ts"]
+    }
+  }
+}

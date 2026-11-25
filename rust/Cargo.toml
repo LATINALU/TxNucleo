@@ -1,0 +1,19 @@
+[package]
+name = "txnucleo"
+version = "0.5.0"
+edition = "2021"
+description = "Núcleo de alto rendimiento de txnucleo: azar determinista, física por tiles, hash espacial, A*, Verlet, curvas de escalado, daño y balance. Sin dependencias; compila a nativo y a WebAssembly."
+license-file = "../LICENSE"
+publish = false
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+
+[dev-dependencies]
+serde_json = "=1.0.154"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

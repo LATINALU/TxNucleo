@@ -1,0 +1,37 @@
+{
+  "version": "txnucleo.hoja.v1",
+  "imagen": "bichos.png",
+  "ancho": 37,
+  "alto": 7,
+  "cuadros": [
+    {
+      "nombre": "bicho",
+      "x": 0,
+      "y": 0,
+      "w": 14,
+      "h": 7
+    },
+    {
+      "nombre": "bicho_rojo",
+      "x": 15,
+      "y": 0,
+      "w": 14,
+      "h": 7
+    },
+    {
+      "nombre": "gema",
+      "x": 30,
+      "y": 0,
+      "w": 7,
+      "h": 6
+    }
+  ],
+  "animaciones": [],
+  "pivote": [
+    0.5,
+    1
+  ],
+  "origen": {
+    "herramienta": "pxl"
+  }
+}

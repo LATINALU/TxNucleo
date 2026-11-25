@@ -1,0 +1,15 @@
+[package]
+name = "txnucleo-godot"
+version = "0.5.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+txnucleo = { path = ".." }
+godot = { version = "=0.5.6", features = ["api-4-5"] }
+
+[profile.release]
+lto = "thin"

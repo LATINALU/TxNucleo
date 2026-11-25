@@ -1,0 +1,38 @@
+[
+  {
+    "role": "cuerpo",
+    "hex": "#38b764",
+    "uv": [
+      0.14,
+      0.66
+    ],
+    "sample_radius_px": 0,
+    "source_sha256": "1b24436dc9ecc6d3c6d5599512e0d8b04395d953463ed44493e7928a0f01c65a",
+    "reference_id": null,
+    "note": "Median encoded RGB; review ICC/color interpretation before locking."
+  },
+  {
+    "role": "cuerpo_rojo",
+    "hex": "#b13e53",
+    "uv": [
+      0.55,
+      0.66
+    ],
+    "sample_radius_px": 0,
+    "source_sha256": "1b24436dc9ecc6d3c6d5599512e0d8b04395d953463ed44493e7928a0f01c65a",
+    "reference_id": null,
+    "note": "Median encoded RGB; review ICC/color interpretation before locking."
+  },
+  {
+    "role": "contorno",
+    "hex": "#1a1c2c",
+    "uv": [
+      0.92,
+      0.66
+    ],
+    "sample_radius_px": 0,
+    "source_sha256": "1b24436dc9ecc6d3c6d5599512e0d8b04395d953463ed44493e7928a0f01c65a",
+    "reference_id": null,
+    "note": "Median encoded RGB; review ICC/color interpretation before locking."
+  }
+]

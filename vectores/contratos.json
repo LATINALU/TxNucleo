@@ -1,0 +1,1014 @@
+{
+ "version": 1,
+ "nota": "Casos compartidos de validación de contratos de la red; TS y Python deben coincidir. Regenerar: node vectores/contratos.ts",
+ "casos": [
+  {
+   "nombre": "hoja válida (animación pxl)",
+   "tipo": "hoja",
+   "dato": {
+    "version": "txnucleo.hoja.v1",
+    "imagen": "respira.png",
+    "ancho": 28,
+    "alto": 7,
+    "cuadros": [
+     {
+      "nombre": "respira_0",
+      "x": 0,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     },
+     {
+      "nombre": "respira_1",
+      "x": 14,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     }
+    ],
+    "animaciones": [
+     {
+      "nombre": "respira",
+      "desde": 0,
+      "hasta": 1,
+      "bucle": true,
+      "ms": [
+       250,
+       250
+      ]
+     }
+    ],
+    "pivote": [
+     0.5,
+     1
+    ],
+    "origen": {
+     "herramienta": "pxl",
+     "fuente": "arte.px.js"
+    }
+   },
+   "valido": true
+  },
+  {
+   "nombre": "hoja: cuadro fuera de la imagen",
+   "tipo": "hoja",
+   "dato": {
+    "version": "txnucleo.hoja.v1",
+    "imagen": "respira.png",
+    "ancho": 28,
+    "alto": 7,
+    "cuadros": [
+     {
+      "nombre": "respira_0",
+      "x": 0,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     },
+     {
+      "nombre": "respira_1",
+      "x": 500,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     }
+    ],
+    "animaciones": [
+     {
+      "nombre": "respira",
+      "desde": 0,
+      "hasta": 1,
+      "bucle": true,
+      "ms": [
+       250,
+       250
+      ]
+     }
+    ],
+    "pivote": [
+     0.5,
+     1
+    ],
+    "origen": {
+     "herramienta": "pxl",
+     "fuente": "arte.px.js"
+    }
+   },
+   "valido": false
+  },
+  {
+   "nombre": "hoja: ms no coincide con el tramo",
+   "tipo": "hoja",
+   "dato": {
+    "version": "txnucleo.hoja.v1",
+    "imagen": "respira.png",
+    "ancho": 28,
+    "alto": 7,
+    "cuadros": [
+     {
+      "nombre": "respira_0",
+      "x": 0,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     },
+     {
+      "nombre": "respira_1",
+      "x": 14,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     }
+    ],
+    "animaciones": [
+     {
+      "nombre": "respira",
+      "desde": 0,
+      "hasta": 1,
+      "bucle": true,
+      "ms": [
+       100
+      ]
+     }
+    ],
+    "pivote": [
+     0.5,
+     1
+    ],
+    "origen": {
+     "herramienta": "pxl",
+     "fuente": "arte.px.js"
+    }
+   },
+   "valido": false
+  },
+  {
+   "nombre": "hoja: imagen con ruta que escapa",
+   "tipo": "hoja",
+   "dato": {
+    "version": "txnucleo.hoja.v1",
+    "imagen": "../x.png",
+    "ancho": 28,
+    "alto": 7,
+    "cuadros": [
+     {
+      "nombre": "respira_0",
+      "x": 0,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     },
+     {
+      "nombre": "respira_1",
+      "x": 14,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     }
+    ],
+    "animaciones": [
+     {
+      "nombre": "respira",
+      "desde": 0,
+      "hasta": 1,
+      "bucle": true,
+      "ms": [
+       250,
+       250
+      ]
+     }
+    ],
+    "pivote": [
+     0.5,
+     1
+    ],
+    "origen": {
+     "herramienta": "pxl",
+     "fuente": "arte.px.js"
+    }
+   },
+   "valido": false
+  },
+  {
+   "nombre": "hoja: nombre de cuadro repetido",
+   "tipo": "hoja",
+   "dato": {
+    "version": "txnucleo.hoja.v1",
+    "imagen": "respira.png",
+    "ancho": 28,
+    "alto": 7,
+    "cuadros": [
+     {
+      "nombre": "respira_0",
+      "x": 0,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     },
+     {
+      "nombre": "respira_0",
+      "x": 14,
+      "y": 0,
+      "w": 14,
+      "h": 7,
+      "ms": 250
+     }
+    ],
+    "animaciones": [
+     {
+      "nombre": "respira",
+      "desde": 0,
+      "hasta": 1,
+      "bucle": true,
+      "ms": [
+       250,
+       250
+      ]
+     }
+    ],
+    "pivote": [
+     0.5,
+     1
+    ],
+    "origen": {
+     "herramienta": "pxl",
+     "fuente": "arte.px.js"
+    }
+   },
+   "valido": false
+  },
+  {
+   "nombre": "modelo válido (kiln)",
+   "tipo": "modelo3d",
+   "dato": {
+    "version": "txnucleo.modelo3d.v1",
+    "glb": "caja.glb",
+    "bytes": 3084,
+    "sha256": "860742e3a5541f99538993164b536ed8686eecd0f67cd039e350de6330934fa7",
+    "unidades": "m",
+    "ejes": {
+     "arriba": "+Y",
+     "adelante": "+X"
+    },
+    "caja": {
+     "min": [
+      -0.306,
+      0,
+      -0.306
+     ],
+     "max": [
+      0.306,
+      0.42,
+      0.306
+     ],
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "triangulos": 24,
+    "nodos": [
+     "CajaSuministros",
+     "Mesh_Cuerpo",
+     "Mesh_Banda"
+    ],
+    "materiales": 2,
+    "parametros": {
+     "lado": 0.6,
+     "color": "#6b5a3a"
+    },
+    "colision": {
+     "forma": "caja",
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "etiquetas": [],
+    "qa": "aprobado",
+    "avisos": [],
+    "origen": {
+     "herramienta": "kiln",
+     "fuente": "caja.kiln.js"
+    }
+   },
+   "valido": true
+  },
+  {
+   "nombre": "modelo: min mayor que max",
+   "tipo": "modelo3d",
+   "dato": {
+    "version": "txnucleo.modelo3d.v1",
+    "glb": "caja.glb",
+    "bytes": 3084,
+    "sha256": "860742e3a5541f99538993164b536ed8686eecd0f67cd039e350de6330934fa7",
+    "unidades": "m",
+    "ejes": {
+     "arriba": "+Y",
+     "adelante": "+X"
+    },
+    "caja": {
+     "min": [
+      1,
+      1,
+      1
+     ],
+     "max": [
+      0.306,
+      0.42,
+      0.306
+     ],
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "triangulos": 24,
+    "nodos": [
+     "CajaSuministros",
+     "Mesh_Cuerpo",
+     "Mesh_Banda"
+    ],
+    "materiales": 2,
+    "parametros": {
+     "lado": 0.6,
+     "color": "#6b5a3a"
+    },
+    "colision": {
+     "forma": "caja",
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "etiquetas": [],
+    "qa": "aprobado",
+    "avisos": [],
+    "origen": {
+     "herramienta": "kiln",
+     "fuente": "caja.kiln.js"
+    }
+   },
+   "valido": false
+  },
+  {
+   "nombre": "modelo: no es .glb",
+   "tipo": "modelo3d",
+   "dato": {
+    "version": "txnucleo.modelo3d.v1",
+    "glb": "caja.fbx",
+    "bytes": 3084,
+    "sha256": "860742e3a5541f99538993164b536ed8686eecd0f67cd039e350de6330934fa7",
+    "unidades": "m",
+    "ejes": {
+     "arriba": "+Y",
+     "adelante": "+X"
+    },
+    "caja": {
+     "min": [
+      -0.306,
+      0,
+      -0.306
+     ],
+     "max": [
+      0.306,
+      0.42,
+      0.306
+     ],
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "triangulos": 24,
+    "nodos": [
+     "CajaSuministros",
+     "Mesh_Cuerpo",
+     "Mesh_Banda"
+    ],
+    "materiales": 2,
+    "parametros": {
+     "lado": 0.6,
+     "color": "#6b5a3a"
+    },
+    "colision": {
+     "forma": "caja",
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "etiquetas": [],
+    "qa": "aprobado",
+    "avisos": [],
+    "origen": {
+     "herramienta": "kiln",
+     "fuente": "caja.kiln.js"
+    }
+   },
+   "valido": false
+  },
+  {
+   "nombre": "modelo: qa desconocido",
+   "tipo": "modelo3d",
+   "dato": {
+    "version": "txnucleo.modelo3d.v1",
+    "glb": "caja.glb",
+    "bytes": 3084,
+    "sha256": "860742e3a5541f99538993164b536ed8686eecd0f67cd039e350de6330934fa7",
+    "unidades": "m",
+    "ejes": {
+     "arriba": "+Y",
+     "adelante": "+X"
+    },
+    "caja": {
+     "min": [
+      -0.306,
+      0,
+      -0.306
+     ],
+     "max": [
+      0.306,
+      0.42,
+      0.306
+     ],
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "triangulos": 24,
+    "nodos": [
+     "CajaSuministros",
+     "Mesh_Cuerpo",
+     "Mesh_Banda"
+    ],
+    "materiales": 2,
+    "parametros": {
+     "lado": 0.6,
+     "color": "#6b5a3a"
+    },
+    "colision": {
+     "forma": "caja",
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "etiquetas": [],
+    "qa": "quizas",
+    "avisos": [],
+    "origen": {
+     "herramienta": "kiln",
+     "fuente": "caja.kiln.js"
+    }
+   },
+   "valido": false
+  },
+  {
+   "nombre": "modelo: colisión cápsula",
+   "tipo": "modelo3d",
+   "dato": {
+    "version": "txnucleo.modelo3d.v1",
+    "glb": "caja.glb",
+    "bytes": 3084,
+    "sha256": "860742e3a5541f99538993164b536ed8686eecd0f67cd039e350de6330934fa7",
+    "unidades": "m",
+    "ejes": {
+     "arriba": "+Y",
+     "adelante": "+X"
+    },
+    "caja": {
+     "min": [
+      -0.306,
+      0,
+      -0.306
+     ],
+     "max": [
+      0.306,
+      0.42,
+      0.306
+     ],
+     "tamano": [
+      0.612,
+      0.42,
+      0.612
+     ],
+     "centro": [
+      0,
+      0.21,
+      0
+     ]
+    },
+    "triangulos": 24,
+    "nodos": [
+     "CajaSuministros",
+     "Mesh_Cuerpo",
+     "Mesh_Banda"
+    ],
+    "materiales": 2,
+    "parametros": {
+     "lado": 0.6,
+     "color": "#6b5a3a"
+    },
+    "colision": {
+     "forma": "capsula",
+     "radio": 0.3,
+     "alto": 1.8,
+     "centro": [
+      0,
+      0.9,
+      0
+     ]
+    },
+    "etiquetas": [],
+    "qa": "aprobado",
+    "avisos": [],
+    "origen": {
+     "herramienta": "kiln",
+     "fuente": "caja.kiln.js"
+    }
+   },
+   "valido": true
+  },
+  {
+   "nombre": "estilo válido (r2g)",
+   "tipo": "estilo",
+   "dato": {
+    "version": "txnucleo.estilo.v1",
+    "nombre": "bichos",
+    "paleta": [
+     {
+      "rol": "cuerpo",
+      "hex": "#38b764",
+      "oklab": [
+       0.691,
+       -0.14235,
+       0.07948
+      ]
+     },
+     {
+      "rol": "cuerpo_rojo",
+      "hex": "#b13e53",
+      "oklab": [
+       0.53083,
+       0.14578,
+       0.03345
+      ]
+     },
+     {
+      "rol": "contorno",
+      "hex": "#1a1c2c",
+      "oklab": [
+       0.23242,
+       0.00443,
+       -0.0307
+      ]
+     }
+    ],
+    "pixel": {
+     "resolucion": [
+      320,
+      180
+     ],
+     "escala": 4
+    },
+    "referencias": [
+     {
+      "sha256": "1b24436dc9ecc6d3c6d5599512e0d8b04395d953463ed44493e7928a0f01c65a"
+     }
+    ],
+    "notas": [
+     "Colores muestreados con r2g (mediana RGB); revisar perfil de color antes de fijarlos."
+    ]
+   },
+   "valido": true
+  },
+  {
+   "nombre": "estilo: hex inválido",
+   "tipo": "estilo",
+   "dato": {
+    "version": "txnucleo.estilo.v1",
+    "nombre": "bichos",
+    "paleta": [
+     {
+      "rol": "cuerpo",
+      "hex": "#zzz",
+      "oklab": [
+       0.691,
+       -0.14235,
+       0.07948
+      ]
+     },
+     {
+      "rol": "cuerpo_rojo",
+      "hex": "#b13e53",
+      "oklab": [
+       0.53083,
+       0.14578,
+       0.03345
+      ]
+     },
+     {
+      "rol": "contorno",
+      "hex": "#1a1c2c",
+      "oklab": [
+       0.23242,
+       0.00443,
+       -0.0307
+      ]
+     }
+    ],
+    "pixel": {
+     "resolucion": [
+      320,
+      180
+     ],
+     "escala": 4
+    },
+    "referencias": [
+     {
+      "sha256": "1b24436dc9ecc6d3c6d5599512e0d8b04395d953463ed44493e7928a0f01c65a"
+     }
+    ],
+    "notas": [
+     "Colores muestreados con r2g (mediana RGB); revisar perfil de color antes de fijarlos."
+    ]
+   },
+   "valido": false
+  },
+  {
+   "nombre": "estilo: rol repetido",
+   "tipo": "estilo",
+   "dato": {
+    "version": "txnucleo.estilo.v1",
+    "nombre": "bichos",
+    "paleta": [
+     {
+      "rol": "cuerpo",
+      "hex": "#38b764",
+      "oklab": [
+       0.691,
+       -0.14235,
+       0.07948
+      ]
+     },
+     {
+      "rol": "cuerpo",
+      "hex": "#b13e53",
+      "oklab": [
+       0.53083,
+       0.14578,
+       0.03345
+      ]
+     },
+     {
+      "rol": "contorno",
+      "hex": "#1a1c2c",
+      "oklab": [
+       0.23242,
+       0.00443,
+       -0.0307
+      ]
+     }
+    ],
+    "pixel": {
+     "resolucion": [
+      320,
+      180
+     ],
+     "escala": 4
+    },
+    "referencias": [
+     {
+      "sha256": "1b24436dc9ecc6d3c6d5599512e0d8b04395d953463ed44493e7928a0f01c65a"
+     }
+    ],
+    "notas": [
+     "Colores muestreados con r2g (mediana RGB); revisar perfil de color antes de fijarlos."
+    ]
+   },
+   "valido": false
+  },
+  {
+   "nombre": "estilo: escala no entera",
+   "tipo": "estilo",
+   "dato": {
+    "version": "txnucleo.estilo.v1",
+    "nombre": "bichos",
+    "paleta": [
+     {
+      "rol": "cuerpo",
+      "hex": "#38b764",
+      "oklab": [
+       0.691,
+       -0.14235,
+       0.07948
+      ]
+     },
+     {
+      "rol": "cuerpo_rojo",
+      "hex": "#b13e53",
+      "oklab": [
+       0.53083,
+       0.14578,
+       0.03345
+      ]
+     },
+     {
+      "rol": "contorno",
+      "hex": "#1a1c2c",
+      "oklab": [
+       0.23242,
+       0.00443,
+       -0.0307
+      ]
+     }
+    ],
+    "pixel": {
+     "resolucion": [
+      320,
+      180
+     ],
+     "escala": 2.5
+    },
+    "referencias": [
+     {
+      "sha256": "1b24436dc9ecc6d3c6d5599512e0d8b04395d953463ed44493e7928a0f01c65a"
+     }
+    ],
+    "notas": [
+     "Colores muestreados con r2g (mediana RGB); revisar perfil de color antes de fijarlos."
+    ]
+   },
+   "valido": false
+  },
+  {
+   "nombre": "estilo: sin pixel (arte no pixelado)",
+   "tipo": "estilo",
+   "dato": {
+    "version": "txnucleo.estilo.v1",
+    "nombre": "bichos",
+    "paleta": [
+     {
+      "rol": "cuerpo",
+      "hex": "#38b764",
+      "oklab": [
+       0.691,
+       -0.14235,
+       0.07948
+      ]
+     },
+     {
+      "rol": "cuerpo_rojo",
+      "hex": "#b13e53",
+      "oklab": [
+       0.53083,
+       0.14578,
+       0.03345
+      ]
+     },
+     {
+      "rol": "contorno",
+      "hex": "#1a1c2c",
+      "oklab": [
+       0.23242,
+       0.00443,
+       -0.0307
+      ]
+     }
+    ],
+    "referencias": [
+     {
+      "sha256": "1b24436dc9ecc6d3c6d5599512e0d8b04395d953463ed44493e7928a0f01c65a"
+     }
+    ],
+    "notas": [
+     "Colores muestreados con r2g (mediana RGB); revisar perfil de color antes de fijarlos."
+    ]
+   },
+   "valido": true
+  },
+  {
+   "nombre": "manifiesto válido",
+   "tipo": "recursos",
+   "dato": {
+    "version": "txnucleo.recursos.v1",
+    "recursos": [
+     {
+      "ruta": "arte/bichos.png",
+      "tipo": "imagen",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origen": {
+       "herramienta": "pxl"
+      },
+      "licencia": "propia"
+     }
+    ]
+   },
+   "valido": true
+  },
+  {
+   "nombre": "manifiesto: ruta absoluta",
+   "tipo": "recursos",
+   "dato": {
+    "version": "txnucleo.recursos.v1",
+    "recursos": [
+     {
+      "ruta": "C:/x.png",
+      "tipo": "imagen",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origen": {
+       "herramienta": "pxl"
+      },
+      "licencia": "propia"
+     }
+    ]
+   },
+   "valido": false
+  },
+  {
+   "nombre": "manifiesto: sha corto",
+   "tipo": "recursos",
+   "dato": {
+    "version": "txnucleo.recursos.v1",
+    "recursos": [
+     {
+      "ruta": "arte/bichos.png",
+      "tipo": "imagen",
+      "sha256": "abc",
+      "origen": {
+       "herramienta": "pxl"
+      },
+      "licencia": "propia"
+     }
+    ]
+   },
+   "valido": false
+  },
+  {
+   "nombre": "manifiesto: ruta repetida",
+   "tipo": "recursos",
+   "dato": {
+    "version": "txnucleo.recursos.v1",
+    "recursos": [
+     {
+      "ruta": "arte/bichos.png",
+      "tipo": "imagen",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origen": {
+       "herramienta": "pxl"
+      },
+      "licencia": "propia"
+     },
+     {
+      "ruta": "arte/bichos.png",
+      "tipo": "imagen",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origen": {
+       "herramienta": "pxl"
+      },
+      "licencia": "propia"
+     }
+    ]
+   },
+   "valido": false
+  },
+  {
+   "nombre": "manifiesto: sin licencia",
+   "tipo": "recursos",
+   "dato": {
+    "version": "txnucleo.recursos.v1",
+    "recursos": [
+     {
+      "ruta": "arte/bichos.png",
+      "tipo": "imagen",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origen": {
+       "herramienta": "pxl"
+      },
+      "licencia": ""
+     }
+    ]
+   },
+   "valido": false
+  },
+  {
+   "nombre": "manifiesto: tipo desconocido",
+   "tipo": "recursos",
+   "dato": {
+    "version": "txnucleo.recursos.v1",
+    "recursos": [
+     {
+      "ruta": "arte/bichos.png",
+      "tipo": "video",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origen": {
+       "herramienta": "pxl"
+      },
+      "licencia": "propia"
+     }
+    ]
+   },
+   "valido": false
+  },
+  {
+   "nombre": "manifiesto: con fuente y hash de la fuente",
+   "tipo": "recursos",
+   "dato": {
+    "version": "txnucleo.recursos.v1",
+    "recursos": [
+     {
+      "ruta": "arte/bichos.png",
+      "tipo": "imagen",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origen": {
+       "herramienta": "pxl",
+       "fuente": "arte/a.px.js",
+       "fuenteSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "licencia": "propia"
+     }
+    ]
+   },
+   "valido": true
+  },
+  {
+   "nombre": "manifiesto: hash de la fuente inválido",
+   "tipo": "recursos",
+   "dato": {
+    "version": "txnucleo.recursos.v1",
+    "recursos": [
+     {
+      "ruta": "arte/bichos.png",
+      "tipo": "imagen",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origen": {
+       "herramienta": "pxl",
+       "fuenteSha256": "xyz"
+      },
+      "licencia": "propia"
+     }
+    ]
+   },
+   "valido": false
+  }
+ ]
+}

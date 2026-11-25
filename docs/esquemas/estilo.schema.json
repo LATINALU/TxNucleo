@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "txnucleo.estilo.v1",
+  "title": "ContratoEstilo",
+  "description": "Paleta por roles (hex + OKLab), resolución de píxel, luz y referencias. Además: roles únicos.",
+  "type": "object",
+  "required": [
+    "version",
+    "nombre",
+    "paleta",
+    "referencias",
+    "notas"
+  ],
+  "properties": {
+    "version": {
+      "const": "txnucleo.estilo.v1"
+    },
+    "nombre": {
+      "type": "string",
+      "minLength": 1
+    },
+    "paleta": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "rol",
+          "hex",
+          "oklab"
+        ],
+        "properties": {
+          "rol": {
+            "type": "string",
+            "minLength": 1
+          },
+          "hex": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "oklab": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          }
+        }
+      }
+    },
+    "pixel": {
+      "type": "object",
+      "required": [
+        "resolucion",
+        "escala"
+      ],
+      "properties": {
+        "resolucion": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "escala": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "luz": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "referencias": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sha256"
+        ],
+        "properties": {
+          "sha256": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
